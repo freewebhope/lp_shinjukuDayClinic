@@ -1,0 +1,197 @@
+//-------------------------------------
+
+//mixin
+
+//--------------------------------------
+
+// Round
+@function round-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'round');
+}
+
+// Ceil
+@function ceil-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'ceil');
+}
+
+// Floor
+@function floor-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'floor');
+}
+
+@function to-fixed ($number, $digits: 0, $round: 'round') {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @for $i from 1 through $digits {
+        $n: $n * 10;
+    }
+    @if $round == 'round' {
+        @return round($number * $n) / $n;
+    } @else if $round == 'ceil' {
+        @return ceil($number * $n) / $n;
+    } @else if $round == 'floor' {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $round } is undefined keyword.';
+        @return $number;
+    }
+}
+
+//Pixels to
+@function sz($value) {
+    @return round-decimal(100vw*($value/$_w), 3);
+}
+@function szpc($value) {
+    @return round-decimal(100vw*($value/$_pc), 3);
+}
+
+//font
+@mixin font-default{
+    font-family: 'Noto Sans JP', Helvetica, Arial, 'Hiragino Sans', YuGothic,'Yu Gothic medium', sans-serif;
+}
+@mixin font-serif{
+    font-family: 'Noto Serif JP', YuMincho, "Yu Mincho", "Hiragino Mincho ProN", serif;
+    letter-spacing: $mar-base/20;
+}
+
+//kenten
+@mixin kenten_bg($color:currentColor) {
+    @content;
+    padding: 0.16em 0;
+    background-repeat: repeat-x;
+    background-size: .96em 0.56em;
+    background-position: top left;
+    background-image: radial-gradient(0.16em 0.16em at center center, $color 48%, transparent 56%);
+    font-feature-settings: normal;
+}
+@mixin kenten($color:currentColor) {
+    @content;
+    text-emphasis: dot $color;
+    -webkit-text-emphasis: filled $color;
+    &.kenten_js{
+        text-emphasis: none;
+        -webkit-text-emphasis: none;
+        >span{
+            @include kenten_bg($color);
+        }
+    }
+}
+
+//text glow
+@mixin glow($col:#fff,$blur:$mar-base/16,$num:40){
+    $value: null;
+    @for $i from 1 through $num{
+        $theShadow: 0 0 $blur $col;
+        $value: append($value, $theShadow, comma)
+    }
+    text-shadow: $value;
+}
+
+//fukidashi
+@mixin fukidashi($color:#fff){
+    position: relative;
+    background: $color;
+    padding: $mar-base/2.5;
+    &::before{
+        content: '▼';
+        line-height: 1.04;
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%,-48%) scaleX(1.2);
+        color: $color;
+        font-size: 112%;
+        //font-size: szpc(24);
+        @media (max-width: $w) {
+            //font-size: sz(24);
+        }
+    }
+}
+
+//marker
+@mixin marker($color:$yellow){
+    position: relative;
+    padding: 0 round-decimal($mar-base/3,3);
+    line-height: 1.68;
+    &::before{
+        content: '';
+        width: 100%;
+        height: round-decimal($mar-base/3,3);
+        background: $color;
+        position: absolute;
+        left: 0;
+        bottom: $mar-base/16;
+        z-index: -1;
+        border-radius: $mar-base;
+    }
+}
+
+//section
+@mixin section($pt:48,$pb:48,$pclr:268,$splr:80){
+    @if $pt == $pb{
+        padding: szpc($pt) szpc($pclr);
+        @media (max-width: $w) {
+            padding: sz($pt) sz($splr);
+        }
+    } @else {
+        padding: szpc($pt) szpc($pclr) szpc($pb);
+        @media (max-width: $w) {
+            padding: sz($pt) sz($splr) sz($pb);
+        }
+    }
+}
+
+//bg stripe
+@mixin stripe($c1:#000,$c2:#999,$sz1:2px,$sz2:6px,$deg:-45deg){
+	background-image: repeating-linear-gradient($deg, $c1, $c1 $sz1, $c2 0, $c2 $sz2);
+}
+
+//bg dot
+@mixin dot($color-bd1: currentColor,$pitch: $mar-base/4){
+    $color-bd: rgba(#fff,0);
+    background: radial-gradient($color-bd1 16%, $color-bd 24%) space center/$pitch $pitch;
+}
+@mixin dot2($color-bd1: currentColor,$pitch: $mar-base/4){
+    $color-bd: rgba(#fff,0);
+    background: radial-gradient($color-bd1 32%, $color-bd 40%) space center/$pitch $pitch;
+}
+
+//-------------------------------------
+
+//variable
+
+//--------------------------------------
+
+//module
+$_w: 768;
+//$_w: 700;
+$w: $_w+px;
+$w2: $_w+1+px;
+$_pc: 1536;
+//$_pc: 1366;
+$pc: $_pc+px;
+
+$mar-base: 1.6em;
+
+//color
+$red:red;
+$brown:#795A2C;
+$brown2:#AD926A;
+$brown3:#8B705D;
+$text:#000;
+
+//grad
+$grad1:linear-gradient(120deg,#FFA531,#F28A03);
+$grad2:linear-gradient(120deg,#AD926A,#907143);
