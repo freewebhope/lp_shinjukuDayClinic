@@ -1139,6 +1139,13 @@ sub{
                 margin-right: $mar-base/5;
                 padding: 0 $mar-base/8 0 $mar-base/5;
             }
+
+            .lg {
+                font-size: szpc(64);
+                @media (max-width: $w) {
+                    font-size: sz(56);
+                }
+            }
         }
         &_header2{
             position: relative;
