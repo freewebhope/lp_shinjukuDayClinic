@@ -297,6 +297,13 @@ sub{
             @media (max-width: $w) {
                 font-size: sz(26);
             }
+
+            span {
+                font-size: szpc(34);
+                @media (max-width: $w) {
+                    font-size: sz(34);
+                }
+            }
         }
         ul{
             display: flex;
@@ -952,29 +959,46 @@ sub{
                 font-size: szpc(24);
                 margin: $mar-base/2 0;
                 font-weight: 600;
-                display: flex;
-                align-items: center;
                 @media (max-width: $w) {
-                    font-size: sz(28);
+                    font-size: sz(25);
                     margin: $mar-base 0;
                 }
-                &::after{
-                    content: '';
-                    height: 1px;
-                    width: min(#{szpc(96)}, 100%);
-                    background: linear-gradient(90deg,#fff,rgba(#fff,0));
-                    margin-left: $mar-base/2.5;
-                    @media (max-width: $w) {
-                        width: sz(216);
-                    }
-                }
+
             }
             h1{
+                position: relative;
                 font-size: szpc(48);
                 font-weight: 600;
+                width: fit-content;
                 @media (max-width: $w) {
                     font-size: sz(48);
                     line-height: 1.76;
+                    width: 100%;
+                }
+
+                span {
+                    font-size: szpc(33);
+                    @media (max-width: $w) {
+                        font-size: sz(33);
+                    }
+                }
+
+                &::after{
+                    content: '';
+                    height: 1px;
+                    width: min(#{szpc(154)}, 100%);
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(90deg,#fff,rgba(#fff,0));
+                    margin-left: $mar-base/2.5;
+                    transform: translateX(110%);
+                    bottom: szpc(30);
+                    @media (max-width: $w) {
+                        transform: translateX(0);
+                        width: sz(151);
+                        bottom: sz(36);
+                    }
                 }
             }
         }
@@ -1010,9 +1034,15 @@ sub{
                 }
                 .span2{
                     display: inline-block;
-                    font-size: 176%;
+                    // font-size: 176%;
+                    font-size: szpc(50);
+                    line-height: 1;
                     vertical-align: -$mar-base/20;
                     margin: 0 $mar-base/16;
+                    @media (max-width: $w) {
+                        font-size: sz(70);
+                    }
+
                 }
                 .span3{
                     font-size: 128%;
