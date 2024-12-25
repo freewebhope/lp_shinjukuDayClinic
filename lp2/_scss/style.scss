@@ -1372,7 +1372,7 @@ sub{
         }
     }
     &-sec02{
-        @include section(48,0,268,80);//section($pt:48,$pb:48,$pclr:268,$splr:80)
+        @include section(48,50,268,80);//section($pt:48,$pb:48,$pclr:268,$splr:80)
         background: #FFF7F3 linear-gradient(#fff szpc(400),rgba(#fff,0) szpc(800));
         overflow: hidden;
         &_point{
@@ -2333,6 +2333,12 @@ sub{
                     display: block;
                     font-size: 200%;
                 }
+
+                &.comment {
+                    &::before{
+                        background: url("../images/icon_comment_1.svg") no-repeat center/contain;
+                    }
+                }
             }
             ul{
                 display: flex;
@@ -2368,6 +2374,31 @@ sub{
                 &:nth-child(3){
                     transform-origin: left bottom;
                     transform: rotate(10deg);
+                }
+            }
+
+            &_img {
+                display: block;
+                width: szpc(690);
+                margin: szpc(13) auto;
+                @media (max-width: $w) {
+                    width: 100%;
+                    // margin: sz(48) auto 0;
+                }
+            }
+            
+            &_link {
+                width: szpc(614);
+                margin: szpc(-150) auto szpc(48);
+                @media (max-width: $w) {
+                    width: 100%;
+                    margin: sz(48) auto 0;
+                }
+
+                .fwh-cta_btn_tel {
+                    color: #fff;
+                    text-align: center;
+                    padding-left: szpc(47);
                 }
             }
         }
@@ -3411,6 +3442,44 @@ sub{
                     text-align: center;
                     min-width: $mar-base*3;
                 }
+            }
+        }
+    }
+
+    &-point {
+        position: relative;
+        @include section(128,0,152,0);
+
+        &::before{
+            content: '';
+            display: block;
+            background: url("../images/point_bg.png") no-repeat center/cover;
+            width: 100%;
+            height: szpc(1100);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        &_img{
+            display: block;
+            margin-top: szpc(28);
+            @media (max-width: $w) {
+                margin-top: sz(28);
+                width: 100%;
+            }
+        }
+
+
+        &_text{
+            display: block;
+            margin-top: szpc(46);
+            width: min(100%, szpc(1000));
+            margin-inline: auto;
+            @media (max-width: $w) {
+                margin-top: sz(46);
+                width: 100%;
             }
         }
     }
