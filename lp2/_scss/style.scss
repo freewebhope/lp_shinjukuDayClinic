@@ -292,10 +292,10 @@ sub{
             text-align: center;
             font-weight: 500;
             font-size: szpc(24);
-            margin-bottom: $mar-base/1.6;
+            // margin-bottom: $mar-base/1.6;
             line-height: 1.6;
             @media (max-width: $w) {
-                font-size: sz(26);
+                font-size: sz(25);
             }
 
             span {
@@ -309,6 +309,7 @@ sub{
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
+            margin-top: $mar-base/1.6;
         }
         li{
             width: 48.8%;
@@ -669,7 +670,7 @@ sub{
     +*{
         margin-top: min(#{szpc(96)}, 104px);
         @media (max-width: $w) {
-            margin-top: sz(96);
+            margin-top: sz(170);
         }
     }
     .body_sticky &{
@@ -686,8 +687,11 @@ sub{
         }
     }
     &_nav{
-        flex: auto;
+        // flex: auto;
+        display: flex;
+        justify-content: flex-end;
         font-size: max(4px, min(#{szpc(15)}, 18px));
+        padding-right: szpc(16);
         @media (max-width: $w) {
             font-size: sz(24);
             flex: 0;
@@ -779,17 +783,18 @@ sub{
             display: flex;
             white-space: nowrap;
             @media (max-width: $w) {
-                display: none;
+                // display: none;
                 position: fixed;
-                width: sz(768-24);
-                left: sz(12);
-                top: sz(112);
+                width: 100%;
+                left: 0;
+                top: sz(94);
                 background: #F1EDDE;
-                flex-wrap: wrap;
-                padding: sz(24) 0;
+                // padding: sz(24) 0;
             }
             @media (min-width: $w2) {
                 display: flex !important;
+                justify-content: flex-end;
+                width: fit-content;
             }
             li{
                 flex: auto;
@@ -808,7 +813,7 @@ sub{
                     top: 50%;
                     transform: translateY(-50%);
                     @media (max-width: $w) {
-                        transform: rotate(32deg) translateY(-50%);
+                        // transform: rotate(32deg) translateY(-50%);
                         background: $brown;
                     }
                 }
@@ -820,8 +825,15 @@ sub{
                 &:nth-child(2n){
                     &::after{
                         @media (max-width: $w) {
-                            display: none;
+                            // display: none;
                         }
+                    }
+                }
+
+                a {
+                    padding-inline: szpc(16);
+                    @media (max-width: $w) {
+                        padding-inline: sz(50);
                     }
                 }
             }
@@ -842,7 +854,7 @@ sub{
             text-align: center;
             line-height: 1.28;
             @media (max-width: $w) {
-                margin: 0 sz(16) 0 auto;
+                margin: 0 0 0 auto;
             }
             &:hover{
                 .span1::before{
@@ -910,6 +922,34 @@ sub{
                 @media (max-width: $w) {
                     font-size: sz(17);
                 }
+            }
+        }
+
+        &_sp {
+            a {
+                display: flex;
+                align-items: center;
+                gap: sz(10);
+                padding-top: $mar-base/4;
+            }
+            &_wrap {
+                display: flex;
+                flex-direction: column;
+            }
+            .span1 {
+                font-size: sz(32);
+
+                &::before ,
+                &::after {
+                    display: none;
+                }
+            }
+
+            .week {
+                display: block;
+                text-align: left;
+                border: 1px solid #fff;
+                padding: sz(4) sz(10) sz(6);
             }
         }
     }
@@ -2292,7 +2332,7 @@ sub{
             z-index: 1;
             @media (max-width: $w) {
                 margin: sz(64) 0;
-                padding-top: sz(32);
+                padding: sz(32) sz(40) 0;
             }
             &::before{
                 content: '';
@@ -2391,8 +2431,8 @@ sub{
                 width: szpc(614);
                 margin: szpc(-150) auto szpc(48);
                 @media (max-width: $w) {
-                    width: 100%;
-                    margin: sz(48) auto 0;
+                    margin: sz(-150) auto 0;
+                    width: sz(614);
                 }
 
                 .fwh-cta_btn_tel {
@@ -3449,6 +3489,10 @@ sub{
     &-point {
         position: relative;
         @include section(128,0,152,0);
+
+        @media (max-width: $w) {
+            padding: sz(97) sz(40) 0;
+        }
 
         &::before{
             content: '';
