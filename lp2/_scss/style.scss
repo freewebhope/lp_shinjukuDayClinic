@@ -2371,7 +2371,7 @@ sub{
                 }
                 .span1{
                     display: block;
-                    font-size: 200%;
+                    font-size: 180%;
                 }
 
                 &.comment {
@@ -3516,16 +3516,104 @@ sub{
         }
 
 
-        &_text{
-            display: block;
-            margin-top: szpc(46);
-            width: min(100%, szpc(1000));
-            margin-inline: auto;
+        // &_text{
+        //     display: block;
+        //     margin-top: szpc(46);
+        //     width: min(100%, szpc(1000));
+        //     margin-inline: auto;
+        //     @media (max-width: $w) {
+        //         margin-top: sz(46);
+        //         width: 100%;
+        //     }
+        // }
+
+        &_box{
+            position: relative;
+            background-color: #F1EDDE;
+            margin-top: szpc(70);
             @media (max-width: $w) {
-                margin-top: sz(46);
-                width: 100%;
+                margin-top: sz(70);
+            }   
+        }
+
+        &_box_title{
+            position: absolute;
+            top: 0%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: fit-content;
+            margin: 0 auto;
+            @include font-serif;
+            font-size: szpc(32);
+            font-weight: 500;
+            color: #fff;
+            background-color: #AD926A;
+            text-align: center;
+            padding: szpc(0) szpc(22);
+            white-space: nowrap;
+            @media (max-width: $w) {
+                font-size: sz(32);
+                padding: sz(0) sz(22);  
             }
         }
+
+        &_box_list{
+            background-color: #F1EDDE;
+            width: szpc(614);
+            margin: 0 auto;
+            padding: szpc(24) 0 szpc(80);
+            @media (max-width: $w) {
+                width: 100%;
+                padding: sz(64) sz(38) sz(40);
+            }
+
+            li{
+                position: relative;
+                @include font-serif;
+                font-size: szpc(44);
+                color: #795A2C;
+                line-height: 1.6;
+                padding-left: szpc(60);
+                margin-top: szpc(53);
+                @media (max-width: $w) {
+                    font-size: sz(44);
+                    margin-top: sz(23);
+                    padding-left: sz(60);
+                }
+
+                .sm {
+                    font-size: szpc(34);
+                    color: #000;
+                    @media (max-width: $w) {
+                        font-size: sz(34);
+                    }
+                }
+
+                &::before {
+                    content: '';
+                    display: block;
+                    background: url("../images/icon_check_1.svg") no-repeat center/contain;
+                    width: szpc(50);
+                    height: szpc(50);
+                    margin-right: szpc(10);
+                    position: absolute;
+                    top: szpc(10);
+                    left: 0;
+                    @media (max-width: $w) {
+                        width: sz(50);
+                        height: sz(50);
+                        top: sz(10);
+                    }
+                }
+
+                &:not(:last-child){
+                    padding-bottom: szpc(60);
+                    border-bottom: 1px solid #AD926A;
+                }
+            }   
+        }
+
+
     }
 }
 
